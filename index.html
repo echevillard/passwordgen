@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="fr"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags -->
+    <title>PasswordGen - Générateur de password &amp; Partage de Secrets</title>
+    <meta name="description" content="Générateur de mots de passe sécurisés gratuit et outil de partage de secrets chiffrés (avec chiffrement AES-256)">
+    <meta name="keywords" content="générateur mot de passe, password generator, sécurité, chiffrement, partage secret, AES-256, cybersécurité, mot de passe fort, confidentialité">
+    <meta name="author" content="PasswordGen">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta name="googlebot" content="index, follow">
+    <meta name="language" content="fr">
+    <meta name="revisit-after" content="7 days">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://passwordgen.cloud/">
+    
+    <!-- Favicon -->	
+    <link rel="icon" type="image/png" href="img/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/svg+xml" href="https://dev.passwordgen.cloud/img/favicon.svg">
+  
+    <meta name="theme-color" content="#3b82f6">
+    <meta name="msapplication-TileColor" content="#3b82f6">
+    <meta name="msapplication-config" content="/browserconfig.xml">
+
+    
+    <link rel="stylesheet" href="css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="logo">
+                <a href="https://passwordgen.cloud/" style="text-decoration: none; color: inherit;">
+                    <i class="fas fa-shield-alt"></i>
+                    PasswordGen
+                </a>
+            </h1>
+            <p class="subtitle">Générateur de mots de passe sécurisés et partage de secrets</p>
+        </header>
+
+        <div class="tabs">
+            <div class="tab active" data-tab="generator">
+                <i class="fas fa-key"></i>
+                Générateur
+            </div>
+            <div class="tab" data-tab="share">
+                <i class="fas fa-share-alt"></i>
+                Partager Secret
+            </div>
+            <div class="tab" data-tab="retrieve">
+                <i class="fas fa-unlock"></i>
+                Récupérer Secret
+            </div>
+        </div>
+
+        <!-- Module générateur de mots de passe -->
+        <div id="generator" class="tab-content active">
+            <div class="feature-card">
+                <div class="dual-input">
+                    <div class="form-group">
+                        <label for="length">
+                            <i class="fas fa-ruler"></i>
+                            Longueur du mot de passe
+                        </label>
+                        <div class="slider-container">
+                            <input type="range" id="length" class="slider" min="4" max="128" value="16">
+                            <div style="display: flex; justify-content: space-between; margin-top: 5px; font-size: 0.8rem; color: #64748b;">
+                                <span>4</span>
+								<span id="lengthValue"><b>16</b></span>
+                                <span>128</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="count">
+                            <i class="fas fa-list-ol"></i>
+                            Nombre
+                        </label>
+                        <select id="count" class="count-select">
+                            <option value="1" selected="selected">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        <i class="fas fa-cogs"></i>
+                        Options de génération
+                    </label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item active">
+                            <input type="checkbox" id="uppercase" checked="checked">
+                            <label for="uppercase">Majuscules</label>
+                        </div>
+                        <div class="checkbox-item active">
+                            <input type="checkbox" id="lowercase" checked="checked">
+                            <label for="lowercase">Minuscules</label>
+                        </div>
+                        <div class="checkbox-item active">
+                            <input type="checkbox" id="numbers" checked="checked">
+                            <label for="numbers">Chiffres</label>
+                        </div>
+                        <div class="checkbox-item active">
+                            <input type="checkbox" id="symbols" checked="checked">
+                            <label for="symbols">Symboles</label>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn-primary" id="generateBtn">
+                    <i class="fas fa-key"></i>
+                    Générer les mots de passe
+                </button>
+            </div>
+
+            <div id="passwordResults" class="password-display" style="display: block;">
+                <div style="margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center;">
+                    <strong style="color: #374151;">Mots de passe générés :</strong>
+                    <button class="copy-btn" id="copyAllBtn">
+                        <i class="fas fa-copy"></i>
+                        Tout copier
+                    </button>
+                </div>
+                <div id="passwordList" class="password-list"><div class="password-item"><div class="password-text">y_Ou=0@UqUF&gt;6keq</div><button class="copy-btn"><i class="fas fa-copy"></i> Copier</button></div></div>
+            </div>
+
+            <div id="strengthMeter" class="strength-meter" style="display: block;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                    <span style="font-weight: 600; color: #374151;">
+                        <i class="fas fa-chart-bar"></i>
+                        Force du mot de passe
+                    </span>
+                    <span id="strengthText" style="color: #64748b; font-size: 0.9rem;">
+        Forte 
+        <small style="font-size: 0.8em; opacity: 0.8;">
+            (103.9 bits - ~2.94e+11 siècles)
+        </small>
+    </span>
+                </div>
+                <div class="strength-bar">
+                    <div id="strengthFill" class="strength-fill strength-strong" style="background-color: rgb(22, 163, 74);"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Module de partage de secret -->
+        <div id="share" class="tab-content">
+            <div class="feature-card">
+                <h2 style="color: #374151; font-size: 1.5rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+                    <i class="fas fa-user-secret"></i>
+                    Partage de Secret Sécurisé
+                </h2>
+                
+                <div class="form-group">
+                    <label for="secret">
+                        <i class="fas fa-lock"></i>
+                        Secret à partager <span style="color: #64748b; font-weight: normal;">(max 500 caractères)</span>
+                    </label>
+                    <textarea id="secret" placeholder="Entrez votre secret ici (mot de passe, message confidentiel, etc.)." maxlength="500" rows="10"></textarea>
+                    <div style="text-align: right; margin-top: 5px; font-size: 0.8rem; color: #64748b;">
+                        <span id="charCount">0</span>/500 caractères
+                    </div>
+                </div>
+
+                <div class="dual-input">
+                    <div class="form-group">
+                        <label for="retention">
+                            <i class="fas fa-clock"></i>
+                            Durée de rétention
+                        </label>
+                        <select id="retention">
+                            <option value="unique" selected="selected">Usage unique (1 lecture)</option>
+                            <option value="15min">15 minutes</option>
+                            <option value="30min">30 minutes</option>
+                            <option value="1hour">1 heure</option>
+                            <option value="2hours">2 heures</option>
+                            <option value="4hours">4 heures</option>
+                            <option value="1day">1 jour</option>
+                            <option value="7days">7 jours</option>
+                            <option value="30days">30 jours</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="secretPassword">
+                            <i class="fas fa-key"></i>
+                            Mot de passe (optionnel)
+                        </label>
+                        <input type="password" id="secretPassword" placeholder="Password" maxlength="100">
+                    </div>
+                </div>
+
+                <button class="btn-primary" id="shareSecretBtn">
+                    <i class="fas fa-share-alt"></i>
+                    Créer le lien de partage
+                </button>
+
+                <div id="secretLinkResult" class="password-display" style="display: none;">
+                    <div style="margin-bottom: 15px;">
+                        <strong style="color: #374151;">Lien de partage généré :</strong>
+                    </div>
+                    <div class="password-item">
+                        <div id="secretLink" class="password-text"></div>
+                        <button class="copy-btn" id="copyLinkBtn">
+                            <i class="fas fa-copy"></i>
+                            Copier
+                        </button>
+                    </div>
+                    <div class="info-message">
+                        <i class="fas fa-info-circle"></i>
+                        <span id="retentionInfo">Ce lien ne peut être consulté qu'une seule fois et expirera automatiquement.</span><br>
+                        <strong>Partagez ce lien avec la personne concernée - elle pourra cliquer dessus pour récupérer le secret directement.</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Module de récupération de secret -->
+        <div id="retrieve" class="tab-content">
+            <div class="feature-card">
+                <h2 style="color: #374151; font-size: 1.5rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+                    <i class="fas fa-unlock"></i>
+                    Récupérer un Secret
+                </h2>
+                
+                <div class="form-group">
+                    <label for="secretId">
+                        <i class="fas fa-link"></i>
+                        ID ou lien du secret
+                    </label>
+                    <input type="text" id="secretId" placeholder="Collez l'ID ou le lien complet du secret">
+                </div>
+
+                <div id="passwordSection" class="form-group" style="display: none;">
+                    <label for="retrievePassword">
+                        <i class="fas fa-key"></i>
+                        Mot de passe du secret
+                    </label>
+                    <input type="password" id="retrievePassword" placeholder="Entrez le mot de passe du secret" autocomplete="current-password">
+                </div>
+
+                <button class="btn-primary" id="retrieveSecretBtn">
+                    <i class="fas fa-unlock-alt"></i>
+                    Récupérer le secret
+                </button>
+
+                <div id="retrievedSecretResult" class="password-display" style="display: none;">
+                    <div style="margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center;">
+                        <strong style="color: #374151;">Secret récupéré :</strong>
+                        <div style="font-size: 0.8rem; color: #64748b;">
+                            <span id="secretInfo"></span>
+                        </div>
+                    </div>
+                    <div class="password-item">
+                        <textarea id="retrievedSecret" class="password-text" readonly="readonly" style="border: none; background: transparent; resize: none; min-height: 100px; padding: 0;" rows="10"></textarea>
+                        <button class="copy-btn" id="copySecretBtn">
+                            <i class="fas fa-copy"></i>
+                            Copier
+                        </button>
+                    </div>
+                    <div class="info-message">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <span id="deletionInfo">Ce secret a été supprimé définitivement après cette consultation.</span>
+                    </div>
+                </div>
+
+                <div id="errorResult" style="display: none;"></div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p>
+                <i class="fas fa-lock"></i>
+                Vos mots de passe sont générés localement et vos secrets sont chiffrés pour une sécurité maximale
+            </p>
+            <p style="margin-top: 15px; display: flex; justify-content: center; gap: 30px; flex-wrap: wrap;">
+                <a href="https://dev.passwordgen.cloud/about.php" style="color: #3b82f6; text-decoration: none; font-weight: 500; transition: color 0.2s ease;">
+                    <i class="fas fa-info-circle"></i>
+                    Comment ça fonctionne &amp; Versions
+                </a>
+                <a href="https://dev.passwordgen.cloud/stats.php" style="color: #10b981; text-decoration: none; font-weight: 500; transition: color 0.2s ease;">
+                    <i class="fas fa-chart-bar"></i>
+                    Statistiques d'utilisation
+                </a>
+            </p>
+        </footer>
+    </div>
+
+    <script src="PasswordGen%20-%20Ge%CC%81ne%CC%81rateur%20de%20password%20&amp;%20Partage%20de%20Secrets_fichiers/script_002.js"></script>
+
+</body></html>
