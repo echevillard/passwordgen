@@ -315,7 +315,7 @@ function getCharsetSize(options) {
     if (options.uppercase) size += 26;
     if (options.lowercase) size += 26;
     if (options.numbers) size += 10;
-    // MAJ echevillard 25092025 ; nombre de symboles dans le charset symbols
+    // MAJ echevillard 25092025 ; mise à jour du nombre de symboles dans le charset symbols
     if (options.symbols) size += 28;
     return size;
 }
@@ -331,6 +331,7 @@ function estimateCrackTime(entropy) {
     const attemptsPerSecond = 1e9; // 1 milliard de tentatives par seconde
     const seconds = attempts / attemptsPerSecond;
     
+    // MAJ echevillard 25092025 ; limite minimale du temps de cassage à 1 seconde
     if (seconds < 2) return `1 seconde`;
     if (seconds < 60) return `${seconds.toFixed(0)} secondes`;
     if (seconds < 3600) return `${(seconds / 60).toFixed(0)} minutes`;
