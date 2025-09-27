@@ -1,5 +1,5 @@
 # passwordgen
-Générateur de mots de passe sécurisés
+Générateur de mots de passe sécurisés - Version 2.0.4
 
 Version originale : Fabien Gougoux (https://www.linkedin.com/in/fabiengougoux/)
 

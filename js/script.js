@@ -133,6 +133,11 @@ function generatePasswords() {
     if (charset.length === 0) {
         console.warn('Aucun charset sélectionné, utilisation par défaut');
         charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        // MAJ echevillard 27092025 ; on coche les bonnes cases
+        document.getElementById('uppercase').checked = true;
+        document.getElementById('lowercase').checked = true;
+        document.getElementById('numbers').checked = true;
+        document.getElementById('symbols').checked = false;
     }
 
     console.log(`Charset: ${charset.length} caractères`);
